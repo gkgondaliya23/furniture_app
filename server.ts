@@ -3,6 +3,7 @@ import express from 'express';
 // import cors from 'cors';
 import { DBUtils } from './DBUtils/dbUtils';
 import userRoutes from './Routes/userRoutes';
+import productRoutes from './Routes/productRoutes';
 
 dotenv.config({
     path: './.env'
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended:false }));
 
 app.use('/api/users', userRoutes);
+app.use('/api/products', productRoutes);
 
 // server and DB connection
 if(port && dbUrl && dbName){ 
