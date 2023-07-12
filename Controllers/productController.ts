@@ -63,3 +63,23 @@ export const getAllProduct =async (req:Request, res:Response) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
+/**
+ * @usage : Get Product 
+ * @url : "https://localhost:7070/api/products/:productId"
+ * @method : GET
+ * @access : Public 
+ */
+
+export const getProduct =async (req:Request, res:Response) => {
+    try {
+        const userObj : any = await UserUtils.getUser(req, res);
+        if(userObj){
+            const product : IProduct | undefined | null = await ProductCollection.findById(req.params.productId);
+            res.status(200).json(product);
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};

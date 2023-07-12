@@ -1,7 +1,7 @@
 {
   "name": "dinnery-app",
   "version": "1.0.0",
-  "description": "Restrurent Booking App",
+  "description": "Furniture App",
   "main": "server.ts",
   "scripts": {
     "start": "node server.ts",
