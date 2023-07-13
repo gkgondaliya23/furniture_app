@@ -83,3 +83,67 @@ export const getProduct =async (req:Request, res:Response) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
+/**
+ * @usage : Update Product 
+ * @url : "https://localhost:7070/api/products/:productId"
+ * @method : PUT
+ * @access : Private 
+ */
+
+export const updateProduct = async (req:Request, res:Response) => {
+    try {
+        const {title, description, price, images, category, subCategory} = req.body;
+        const productID = req.params.productId;
+        const userObj : any = await UserUtils.getUser(req, res);
+        if(userObj){
+            const product : IProduct | undefined | null = await ProductCollection.findById(productID);
+            if(!product){
+                return res.json({message: 'Product not found'});
+            }
+             const newProduct : IProduct = {
+                title : title,
+                description: description,
+                price : price,
+                images : images,
+                category : category,
+                subCategory :subCategory,
+             };
+            const updateproduct  = await ProductCollection.findByIdAndUpdate(productID,
+                {$set : newProduct},
+                {new: true});
+                updateproduct?.save();
+                console.log(updateproduct)
+            res.status(200).json({message: 'Product updated'});
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+/**
+ * @usage : Delete Product 
+ * @url : "https://localhost:7070/api/products/:productId"
+ * @method : DELETE
+ * @access : Private 
+ */
+
+export const deleteProduct = async (req:Request, res:Response) => {
+    try {
+        const productID = req.params.productId;
+        const userObj : any = await UserUtils.getUser(req, res);
+        if(userObj){
+            const product : IProduct | undefined | null = await ProductCollection.findById(productID);
+            if(!product){
+                return res.json({message: 'Product not found'});
+            }
+             await ProductCollection.findByIdAndDelete(productID);
+                
+            res.status(200).json({message: 'Product deleted'});
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
