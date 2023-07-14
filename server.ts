@@ -4,6 +4,7 @@ import express from 'express';
 import { DBUtils } from './DBUtils/dbUtils';
 import userRoutes from './Routes/userRoutes';
 import productRoutes from './Routes/productRoutes';
+import catogoryRoutes from './Routes/categoryRoutes';
 
 dotenv.config({
     path: './.env'
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended:false }));
 
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/categories', catogoryRoutes);
 
 // server and DB connection
 if(port && dbUrl && dbName){ 
