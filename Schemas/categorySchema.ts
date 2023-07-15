@@ -10,6 +10,8 @@ const subCategoryies = new mongoose.Schema<ISubCategory>({
     description: {
         type: String,
     },
+},{
+    versionKey: false
 });
 
 export const SubCategoryColletion = mongoose.model<ISubCategory>('SubCategory', subCategoryies);
