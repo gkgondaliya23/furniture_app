@@ -14,7 +14,7 @@ const subCategoryies = new mongoose.Schema<ISubCategory>({
     versionKey: false
 });
 
-export const SubCategoryColletion = mongoose.model<ISubCategory>('SubCategory', subCategoryies);
+export const SubCategoryColletion = mongoose.model<ISubCategory>('subcategory', subCategoryies);
 
 
 // parent category
@@ -29,7 +29,7 @@ const categories = new mongoose.Schema<ICategory>({
     },
     subcategories : [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'SubCategory',
+        ref: 'subcategory',
     }]
 },
 {
@@ -37,4 +37,4 @@ const categories = new mongoose.Schema<ICategory>({
     versionKey: false,
 });
 
-export const CategoryColletction = mongoose.model<ICategory>('Category', categories);
+export const CategoryColletction = mongoose.model<ICategory>('category', categories);

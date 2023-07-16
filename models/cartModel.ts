@@ -6,7 +6,7 @@ export interface INewCartProduct {
     price: number;
 }
 
-export interface ICart {
+export interface ICart extends Document {
     _id?: string;
     products: INewCartProduct[];
     total: string;
